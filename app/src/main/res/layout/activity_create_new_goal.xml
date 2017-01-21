@@ -38,8 +38,7 @@
         android:id="@+id/quoteView2"
         app:layout_anchorGravity="center_vertical|center_horizontal"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:text="helllo" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 </android.support.design.widget.CoordinatorLayout>
 
