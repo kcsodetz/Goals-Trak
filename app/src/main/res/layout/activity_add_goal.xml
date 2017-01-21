@@ -31,22 +31,31 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="30dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
         android:inputType="numberDecimal"
         android:ems="10"
         android:layout_marginTop="30dp"
         android:id="@+id/numEdit"
-        android:hint="1"
+        android:hint="Number"
         android:layout_below="@+id/enterGoal"
         android:layout_alignStart="@+id/enterGoal" />
 
     <Spinner
-        android:layout_width="120dp"
+        android:layout_width="160dp"
         android:layout_height="40dp"
         android:id="@+id/spinner"
         android:dropDownWidth="match_parent"
         android:layout_alignTop="@+id/numEdit"
         android:layout_alignEnd="@+id/enterGoal" />
+
+    <TextView
+        android:text="Duration/Amount - Ex: 1 Hour, 100 Dollars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:id="@+id/durationText"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
