@@ -13,7 +13,7 @@ public class AddGoalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_goal);
         Spinner dropdown = (Spinner)findViewById(R.id.spinner);
         String[] dropdownList = {"Hours", "Days", "Weeks", "Months", "Dollars", "Repititions", "Other"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dropdownList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dropdownList);
         dropdown.setAdapter(adapter);
     }
 }
