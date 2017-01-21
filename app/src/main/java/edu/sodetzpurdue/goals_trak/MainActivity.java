@@ -5,19 +5,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
+
+    //@Override
+    QuoteManager quoteManager = new QuoteManager();
+    TextView quoteView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        quoteView=(TextView)findViewById(R.id.quoteView);
+        quoteView.setText(quoteManager.getQuote());
     }
 
     public void sendMessage(View view){
         Intent intent = new Intent(this, CreateNewGoal.class);
         startActivity(intent);
     }
+
 }
