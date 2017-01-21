@@ -18,11 +18,11 @@ public class CreateNewGoal extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_goal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //setTitle("Create New Activity");
 
         Intent intent = getIntent();
-        //new
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.new_goal_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
