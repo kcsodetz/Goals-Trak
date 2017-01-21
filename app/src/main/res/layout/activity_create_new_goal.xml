@@ -39,7 +39,9 @@
         android:id="@+id/quoteView2"
         app:layout_anchorGravity="center_vertical|center_horizontal"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
 

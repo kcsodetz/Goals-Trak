@@ -8,25 +8,45 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.sodetzpurdue.goals_trak.AddGoalActivity">
-
-    <Button
-        android:text="OK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp"
-        android:id="@+id/okButton" />
+    tools:context="edu.sodetzpurdue.goals_trak.AddGoalActivity"
+    >
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Enter a Goal"
+        android:hint="Enter a Goal"
         android:ems="10"
         android:layout_marginTop="31dp"
         android:id="@+id/enterGoal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doneButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:layout_marginTop="30dp"
+        android:id="@+id/numEdit"
+        android:hint="1"
+        android:layout_below="@+id/enterGoal"
+        android:layout_alignStart="@+id/enterGoal" />
+
+    <Spinner
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:id="@+id/spinner"
+        android:dropDownWidth="match_parent"
+        android:layout_alignTop="@+id/numEdit"
+        android:layout_alignEnd="@+id/enterGoal" />
+
 </RelativeLayout>
