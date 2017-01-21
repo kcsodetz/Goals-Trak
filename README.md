@@ -1,2 +1,2 @@
 # Goals-Trak
-A better way to keep track of your progression to your longterm and sortterm goals
+A better way to keep track of your progression of your longterm and short term goals
