@@ -16,8 +16,10 @@ public class QuoteManager {
 
     }
 
-    public void addQuote(String quote){
+    //for custom quotes later on
+    public void addQuote(String quote, String author){
         int numQuotes = quotes.length;
+        quote = "\""+quote+".\""+"\n-"+author;
         quotes[numQuotes] = quote;
     }
 

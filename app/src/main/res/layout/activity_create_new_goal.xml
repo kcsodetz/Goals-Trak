@@ -32,5 +32,14 @@
         android:layout_marginBottom="64dp"
         android:src="@drawable/ic_add_black_24dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quoteView2"
+        app:layout_anchorGravity="center_vertical|center_horizontal"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:text="helllo" />
+
 </android.support.design.widget.CoordinatorLayout>
 

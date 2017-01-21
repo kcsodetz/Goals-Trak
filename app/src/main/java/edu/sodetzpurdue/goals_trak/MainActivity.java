@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         quoteView.setText(quoteManager.getQuote());
     }
 
-    public void sendMessage(View view){
+    public void changeView(View view){
         Intent intent = new Intent(this, CreateNewGoal.class);
         startActivity(intent);
     }
