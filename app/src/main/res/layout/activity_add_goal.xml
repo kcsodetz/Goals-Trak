@@ -85,4 +85,14 @@
         android:layout_alignTop="@+id/timeSpinner"
         android:layout_toEndOf="@+id/doneButton" />
 
+    <TextView
+        android:text="AT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/atTextView"
+        android:layout_alignBaseline="@+id/selectTimeButton"
+        android:layout_alignBottom="@+id/selectTimeButton"
+        android:layout_toEndOf="@+id/timeSpinner"
+        android:layout_marginStart="10dp" />
+
 </RelativeLayout>
