@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeView(View view){
-        Intent intent = new Intent(this, CreateNewGoal.class);
+        Intent intent = new Intent(this, AddGoalActivity.class);
         startActivity(intent);
     }
 
