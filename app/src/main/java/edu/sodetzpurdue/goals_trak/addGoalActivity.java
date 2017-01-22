@@ -25,7 +25,8 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     private EditText name, userNumber;
     String goalName = "DEFAULT";
     int amount = -1;
-
+    String frequencySpinner = "DEFAULT";
+    String dayWeekMonthSpinner = "DEFAULT";
     public static final int DIALOG_ID = 0;
     int hour_x;
     int minute_x;
@@ -34,11 +35,6 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
 
         // needs line below or else it throws a NPE
-        setContentView(R.layout.activity_add_goal);
-
-
-
-
         setContentView(R.layout.activity_add_goal);
         dropdown = (Spinner)findViewById(R.id.spinner);
         String[] dropdownList = {"Hours", "Days", "Weeks", "Months", "Dollars", "Repetitions", "Other"};
@@ -64,6 +60,8 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         userNumber = (EditText)findViewById(R.id.numEdit);
                         goalName = name.getText().toString();
                         temp = userNumber.getText().toString();
+                        frequencySpinner = dropdown.getSelectedItem().toString();
+                        dayWeekMonthSpinner = notificationsDrop.getSelectedItem().toString();
                         if (goalName.equals("")){
                             emptyEditTextToast(1);
                         }
@@ -77,6 +75,8 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         }
                         System.out.println(goalName);
                         System.out.println(amount);
+                        System.out.println(frequencySpinner);
+                        System.out.println(dayWeekMonthSpinner);
                     }
                 }
         );
