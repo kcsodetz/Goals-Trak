@@ -18,7 +18,7 @@
         android:hint="Enter a Goal"
         android:ems="10"
         android:layout_marginTop="31dp"
-        android:id="@+id/enterGoal"
+        android:id="@+id/enterGoalTextEdit"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/doneButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onDonePress"/>
 
     <TextView
         android:text="Duration/Amount - Ex: 1 Hour, 100 Dollars"
@@ -38,17 +39,6 @@
         android:id="@+id/durationText"
         android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:layout_marginTop="32dp"
-        android:id="@+id/numEdit"
-        android:hint="Number"
-        android:layout_below="@+id/enterGoal"
-        android:layout_alignStart="@+id/durationText" />
 
     <Spinner
         android:layout_width="160dp"
@@ -94,5 +84,16 @@
         android:layout_alignBottom="@+id/selectTimeButton"
         android:layout_toEndOf="@+id/timeSpinner"
         android:layout_marginStart="10dp" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/numEdit"
+        android:hint="Number"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/enterGoalTextEdit"
+        android:layout_alignStart="@+id/durationText" />
 
 </RelativeLayout>
