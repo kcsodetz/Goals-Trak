@@ -12,14 +12,19 @@ import android.widget.Spinner;
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
     Button timeButton;
     CheckBox checkBox;
+    Spinner dropdown, notificationsDrop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_goal);
-        Spinner dropdown = (Spinner)findViewById(R.id.spinner);
+        dropdown = (Spinner)findViewById(R.id.spinner);
         String[] dropdownList = {"Hours", "Days", "Weeks", "Months", "Dollars", "Repititions", "Other"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dropdownList);
         dropdown.setAdapter(adapter);
+        notificationsDrop = (Spinner)findViewById(R.id.timeSpinner);
+        String[] timeList = {"Every Day", "Every Week", "Every Month"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timeList);
+        notificationsDrop.setAdapter(adapter1);
         timeButton = (Button)findViewById(R.id.selectTimeButton);
         timeButton.setEnabled(false);
         checkBox = (CheckBox) findViewById(R.id.notificationsCheckbox);
