@@ -2,6 +2,7 @@ package edu.sodetzpurdue.goals_trak;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,15 +28,18 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     int amount = -1;
     String frequencySpinner = "DEFAULT";
     String dayWeekMonthSpinner = "DEFAULT";
+    String ampm = "DEFAULT";
     public static final int DIALOG_ID = 0;
-    int hour_x;
-    int minute_x;
+    int hour_x = -1;
+    int minute_x = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // needs line below or else it throws a NPE
         setContentView(R.layout.activity_add_goal);
+        
         dropdown = (Spinner)findViewById(R.id.spinner);
         String[] dropdownList = {"Hours", "Days", "Weeks", "Months", "Dollars", "Repetitions", "Other"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dropdownList);
@@ -68,6 +72,11 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         if (temp.equals("")){
                            emptyEditTextToast(2);
                         }
+                        if(checkBox.isChecked() && (hour_x == -1 || minute_x == -1)){
+                            emptyEditTextToast(3);
+                        }
+                        if(!checkBox.isChecked() && (hour_x != -1 || minute_x != -1))
+                            timeButton.setText("SELECT TIME");
                         try {
                             amount = Integer.parseInt(temp);
                         } catch (Exception e){
@@ -77,6 +86,13 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         System.out.println(amount);
                         System.out.println(frequencySpinner);
                         System.out.println(dayWeekMonthSpinner);
+                        if (!goalName.equals("") && !temp.equals("")){
+                            //// TODO: 1/21/2017 implement appropriate methods
+                            GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+                            Intent intent = new Intent();
+                            intent.putExtra("Passer", goalsmanager);
+                            changeActivity(v);
+                        }
                     }
                 }
         );
@@ -84,11 +100,19 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         showTime();
     }
 
+
     public void emptyEditTextToast(int num){
         if (num == 1)
             Toast.makeText(this, "You did not enter a Goal", Toast.LENGTH_SHORT).show();
         if (num == 2)
             Toast.makeText(this, "You did not enter a frequency/amount", Toast.LENGTH_SHORT).show();
+        if (num == 3)
+            Toast.makeText(this, "You did not enter a time for notifications", Toast.LENGTH_SHORT).show();
+    }
+
+    public void changeActivity(View view){
+        Intent intent = new Intent(this, DisplayGoalActivity.class);
+        startActivity(intent);
     }
 
     /*public void onDonePress(View view){
@@ -135,7 +159,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             hour_x = hourOfDay;
             minute_x = minute;
-            String ampm = "AM";
+            ampm = "AM";
             if (hourOfDay > 12) {
                 hour_x = hourOfDay - 12;
                 ampm = "PM";
