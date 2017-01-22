@@ -11,8 +11,9 @@ public class DisplayGoalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_goal);
         //// TODO: 1/22/2017 finish methods
-        Intent intent = getIntent();
-        GoalsManager goalsmanager = intent.getParcelableExtra("Passer");
+        Bundle bundle = getIntent().getExtras();
+        GoalsManager goalsmanager = (GoalsManager) bundle.getSerializable("key");
+        setTitle(goalsmanager.getGoal());
 
     }
 

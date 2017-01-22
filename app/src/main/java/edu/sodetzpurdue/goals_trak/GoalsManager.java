@@ -9,11 +9,15 @@ import java.io.Serializable;
  * Created by Ken Sodetz on 1/21/2017.
  */
 
-public class GoalsManager implements Parcelable{
+public class GoalsManager implements Serializable{
+
+    public static final long serialVersionUID = 1L;
+
     private String goal, qualifier, frequency, ampm;
     private int durationNum, hour, min;
     private double percentage, runningTotal;
     private boolean isComplete;
+
     public GoalsManager(String goal, int durationNum, String qualifier, String frequency, int hour, int min, String ampm){
         this.goal = goal;
         this.durationNum = durationNum;
@@ -72,42 +76,5 @@ public class GoalsManager implements Parcelable{
         return isComplete;
     }
 
-    //can ignore
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) { //// TODO: 1/22/2017 finish methods
-        dest.writeInt(hour);
-        dest.writeInt(min);
-        dest.writeInt(durationNum);
-        dest.writeString(goal);
-        dest.writeString(qualifier);
-        dest.writeString(frequency);
-        dest.writeString(ampm);
-    }
-
-    public static final Parcelable.Creator<GoalsManager> CREATOR
-            = new Parcelable.Creator<GoalsManager>() {
-        public GoalsManager createFromParcel(Parcel in) {
-            return new GoalsManager(in);
-        }
-
-        public GoalsManager[] newArray(int size) {
-            return new GoalsManager[size];
-        }
-
-    };
-
-    private GoalsManager(Parcel in){
-        hour = in.readInt();
-        min = in.readInt();
-        durationNum = in.readInt();
-        goal = in.readString();
-        qualifier = in.readString();
-        frequency = in.readString();
-        ampm = in.readString();
-    }
 }

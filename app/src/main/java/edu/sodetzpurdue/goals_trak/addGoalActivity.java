@@ -3,6 +3,7 @@ package edu.sodetzpurdue.goals_trak;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,27 +40,25 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
 
         // needs line below or else it throws a NPE
         setContentView(R.layout.activity_add_goal);
-        
         dropdown = (Spinner)findViewById(R.id.spinner);
-        String[] dropdownList = {"Hours", "Days", "Weeks", "Months", "Dollars", "Repetitions", "Other"};
+        final String[] dropdownList = {"Hours", "Days", "Weeks", "Months", "Dollars", "Repetitions", "Other"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dropdownList);
         dropdown.setAdapter(adapter);
         notificationsDrop = (Spinner)findViewById(R.id.timeSpinner);
         String[] timeList = {"Every Day", "Every Week", "Every Month"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timeList);
-
         notificationsDrop.setAdapter(adapter1);
         timeButton = (Button)findViewById(R.id.selectTimeButton);
         timeButton.setEnabled(false);
         notificationsDrop.setEnabled(false);
         checkBox = (CheckBox) findViewById(R.id.notificationsCheckbox);
         checkBox.setOnClickListener(this);
-
         doneBtn = (Button)findViewById(R.id.doneButton);
         doneBtn.setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
+
                         name = (EditText)findViewById(R.id.enterGoalTextEdit);
                         userNumber = (EditText)findViewById(R.id.numEdit);
                         goalName = name.getText().toString();
@@ -88,9 +87,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         System.out.println(dayWeekMonthSpinner);
                         if (!goalName.equals("") && !temp.equals("")){
                             //// TODO: 1/21/2017 implement appropriate methods
-                            GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
-                            Intent intent = new Intent();
-                            intent.putExtra("Passer", goalsmanager);
+                            createGoalsManagerObject();
                             changeActivity(v);
                         }
                     }
@@ -99,6 +96,13 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
 
         showTime();
     }
+
+    public void createGoalsManagerObject(){
+        Intent intent = new Intent(this, DisplayGoalActivity.class);
+        GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+        //intent.putExtra("goalsmanager", goalsmanager);
+    }
+
 
 
     public void emptyEditTextToast(int num){
@@ -112,8 +116,20 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
 
     public void changeActivity(View view){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
-        startActivity(intent);
+        GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+        intent.putExtra("key", goalsmanager);
+        startActivityForResult(intent, 12345);
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+        if (requestCode == 12345){
+            if (resultCode == RESULT_OK){
+                GoalsManager goalsManager = (GoalsManager)intent.getSerializableExtra("key");
+            }
+        }
+    }
+
 
     /*public void onDonePress(View view){
         goalName = name.getText().toString();
