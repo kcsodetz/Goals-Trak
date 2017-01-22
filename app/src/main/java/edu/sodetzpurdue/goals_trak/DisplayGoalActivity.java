@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class DisplayGoalActivity extends AppCompatActivity {
     TextView runningTotalText, durationNumText, frequencyText, percentageText, congratsText;
-    Button addBtn, doneBtn;
+    Button addBtn, backBtn;
     EditText addEdit;
 
     Double addedNum;
@@ -37,7 +37,8 @@ public class DisplayGoalActivity extends AppCompatActivity {
         percentageText.setText(temp);
         congratsText = (TextView)findViewById(R.id.congratsText);
         addBtn = (Button)findViewById(R.id.addToRunningButton);
-        addBtn.setHint("Enter a Number:");
+
+        backBtn = (Button)findViewById(R.id.backToList);
         addBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -59,6 +60,11 @@ public class DisplayGoalActivity extends AppCompatActivity {
         );
     }
 
+    public void changeView(View view){
+        Intent intent = new Intent(this, GoalsListActivity.class);
+        startActivity(intent);
+    }
+
     public void toastInvalid(int code){
         if (code == 1)
             Toast.makeText(this, "Must enter a number", Toast.LENGTH_SHORT).show();
@@ -77,8 +83,9 @@ public class DisplayGoalActivity extends AppCompatActivity {
         temp = Double.toString(goalsmanager.getPercentage());
         percentageText.setText(temp);
         if (isComplete) {
+            percentageText.setText("100");
             congratsText.setText("Congratulations!!! You have completed your goal!");
-            addBtn.setHint(" ");
+            addEdit.setHint(" ");
             addBtn.setEnabled(false);
             addEdit.setEnabled(false);
 
