@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DisplayGoalActivity extends AppCompatActivity {
-    TextView runningTotalText, durationNumText, frequencyText, percentageText;
+    TextView runningTotalText, durationNumText, frequencyText, percentageText, congratsText;
     Button addBtn, doneBtn;
     EditText addEdit;
 
@@ -35,13 +35,16 @@ public class DisplayGoalActivity extends AppCompatActivity {
         frequencyText.setText(goalsmanager.getQualifier());
         temp = Double.toString(goalsmanager.getPercentage());
         percentageText.setText(temp);
+        congratsText = (TextView)findViewById(R.id.congratsText);
         addBtn = (Button)findViewById(R.id.addToRunningButton);
+        addBtn.setHint("Enter a Number:");
         addBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         addEdit = (EditText)findViewById(R.id.addToRunningEdit);
                         String temp = addEdit.getText().toString();
+                        addEdit.setText("");
                         if (temp.equals(""))
                             toastInvalid(1);
                         try {
@@ -50,7 +53,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
                         } catch (Exception e){
                             System.out.println("ERROR");
                         }
-                        updateScreenNumbers(goalsmanager);
+                        updateScreenNumbers(goalsmanager, goalsmanager.checkIfComplete());
                     }
                 }
         );
@@ -61,7 +64,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
             Toast.makeText(this, "Must enter a number", Toast.LENGTH_SHORT).show();
     }
 
-    public void updateScreenNumbers(GoalsManager goalsmanager){
+    public void updateScreenNumbers(GoalsManager goalsmanager, Boolean isComplete){
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
         durationNumText = (TextView)findViewById(R.id.durationNumText);
         frequencyText = (TextView)findViewById(R.id.frequencyText);
@@ -73,6 +76,13 @@ public class DisplayGoalActivity extends AppCompatActivity {
         frequencyText.setText(goalsmanager.getQualifier());
         temp = Double.toString(goalsmanager.getPercentage());
         percentageText.setText(temp);
+        if (isComplete) {
+            congratsText.setText("Congratulations!!! You have completed your goal!");
+            addBtn.setHint(" ");
+            addBtn.setEnabled(false);
+            addEdit.setEnabled(false);
+
+        }
     }
 
 

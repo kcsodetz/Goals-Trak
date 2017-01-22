@@ -14,7 +14,7 @@
         android:text="/"
         android:layout_width="40dp"
         android:layout_height="60dp"
-        android:id="@+id/textView5"
+        android:id="@+id/slashTextChar"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:layout_alignBaseline="@+id/runningTotalText"
         android:layout_alignBottom="@+id/runningTotalText"
@@ -33,20 +33,10 @@
     <TextView
         android:text="TextView"
         android:layout_height="60dp"
-        android:id="@+id/percentageText"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:layout_width="80dp"
-        android:layout_alignBaseline="@+id/durationNumText"
-        android:layout_alignBottom="@+id/durationNumText"
-        android:layout_toStartOf="@+id/percentSymbolText" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_height="60dp"
         android:id="@+id/durationNumText"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:layout_alignBaseline="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignBaseline="@+id/slashTextChar"
+        android:layout_alignBottom="@+id/slashTextChar"
         android:layout_toEndOf="@+id/runningTotalText"
         android:layout_marginStart="24dp"
         android:layout_width="80dp" />
@@ -59,16 +49,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_width="80dp" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_marginTop="46dp"
-        android:id="@+id/frequencyText"
-        android:layout_height="30dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:layout_alignTop="@+id/durationNumText"
-        android:layout_toStartOf="@+id/percentageText"
         android:layout_width="80dp" />
 
     <Button
@@ -98,4 +78,34 @@
         android:id="@+id/backToList"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_height="60dp"
+        android:id="@+id/percentageText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:layout_width="100dp"
+        android:layout_alignBaseline="@+id/durationNumText"
+        android:layout_alignBottom="@+id/durationNumText"
+        android:layout_toEndOf="@+id/backToList" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_marginTop="48dp"
+        android:id="@+id/frequencyText"
+        android:layout_height="30dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="80dp"
+        android:layout_alignTop="@+id/durationNumText"
+        android:layout_alignStart="@+id/backToList"
+        android:layout_marginStart="19dp" />
+
+    <TextView
+        android:id="@+id/congratsText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/addToRunningButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp" />
 </RelativeLayout>
