@@ -100,6 +100,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     public void createGoalsManagerObject(){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
         GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+        ((GoalsTrak)getApplication()).addObject(goalsmanager);
         //intent.putExtra("goalsmanager", goalsmanager);
     }
 
