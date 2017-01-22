@@ -61,7 +61,7 @@ public class GoalsManager implements Serializable{
     }
 
 
-    private boolean sendNotifications(){
+    private boolean sendNotifications(){ // TODO: 1/22/2017 finish method
         if (hour == -1 || min == -1)
             return false;
         return true;
