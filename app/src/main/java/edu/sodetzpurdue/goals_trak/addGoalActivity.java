@@ -27,6 +27,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         notificationsDrop.setAdapter(adapter1);
         timeButton = (Button)findViewById(R.id.selectTimeButton);
         timeButton.setEnabled(false);
+        notificationsDrop.setEnabled(false);
         checkBox = (CheckBox) findViewById(R.id.notificationsCheckbox);
         checkBox.setOnClickListener(this);
     }
@@ -37,9 +38,11 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         CheckBox t = (CheckBox) v;
         if (t.isChecked()){
             timeButton.setEnabled(true);
+            notificationsDrop.setEnabled(true);
         }
         else {
             timeButton.setEnabled(false);
+            notificationsDrop.setEnabled(false);
         }
     }
 }
