@@ -16,7 +16,8 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     Button timeButton;
     CheckBox checkBox;
     Spinner dropdown, notificationsDrop;
-    static final int DIALOGE_ID = 0;
+    String timeString = "Select Time";
+    public static final int DIALOG_ID = 0;
     int hour_x;
     int minute_x;
     @Override
@@ -44,7 +45,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
-                        showDialog(DIALOGE_ID);
+                        showDialog(DIALOG_ID);
                     }
                 }
         );
@@ -52,7 +53,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected Dialog onCreateDialog(int id){
-        if (id == DIALOGE_ID){
+        if (id == DIALOG_ID){
             return new TimePickerDialog(AddGoalActivity.this, kTimePickerListener, hour_x, minute_x, false);
         }
         return null;
@@ -63,8 +64,18 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             hour_x = hourOfDay;
-            minute = minute_x;
-
+            minute_x = minute;
+            String ampm = "AM";
+            if (hourOfDay > 12) {
+                hour_x = hourOfDay - 12;
+                ampm = "PM";
+            }
+            if (hourOfDay == 0)
+                hour_x = 12;
+            timeString = hour_x+":"+minute_x+ampm;
+            if(minute == 0)
+                timeString = hour_x+":00"+ampm;
+            timeButton.setText(timeString);
         }
     };
     //@Override
