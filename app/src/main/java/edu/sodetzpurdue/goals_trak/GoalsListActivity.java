@@ -39,7 +39,7 @@ public class GoalsListActivity extends AppCompatActivity {
         startActivityForResult(intent, 12345);
     }
 
-    public View getViewByPosition(int pos, ListView listView) {
+    /*public View getViewByPosition(int pos, ListView listView) {
         final int firstListItemPosition = listView.getFirstVisiblePosition();
         final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
@@ -49,7 +49,7 @@ public class GoalsListActivity extends AppCompatActivity {
             final int childIndex = pos - firstListItemPosition;
             return listView.getChildAt(childIndex);
         }
-    }
+    }*/
 
    /*public void changeActivity(View view, ){
         Intent intent = new Intent(this, DisplayGoalActivity.class);

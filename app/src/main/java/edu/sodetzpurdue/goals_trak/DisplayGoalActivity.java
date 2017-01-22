@@ -64,6 +64,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
                             System.out.println("ERROR");
                         }
                         updateScreenNumbers(goalsmanager, goalsmanager.checkIfComplete());
+                        ((GoalsTrak)getApplication()).addObject(goalsmanager);
                     }
                 }
         );
@@ -71,6 +72,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
 
     public void changeView(View view){
         Intent intent = new Intent(this, GoalsListActivity.class);
+        //((GoalsTrak)getApplication()).addObject(goalsManager);
         startActivity(intent);
     }
 
