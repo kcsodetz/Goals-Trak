@@ -56,6 +56,9 @@ public class GoalsManager implements Serializable{
     public double getPercentage(){
         return percentage;
     }
+    public double getRunningTotal(){
+        return runningTotal;
+    }
 
 
     private boolean sendNotifications(){
