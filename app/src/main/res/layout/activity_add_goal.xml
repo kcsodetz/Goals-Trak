@@ -29,7 +29,7 @@
         android:id="@+id/doneButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="onDonePress"/>
+        />
 
     <TextView
         android:text="Duration/Amount - Ex: 1 Hour, 100 Dollars"
