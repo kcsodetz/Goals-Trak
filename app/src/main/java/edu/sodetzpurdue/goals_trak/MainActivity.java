@@ -27,4 +27,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void changeViewActive(View view){
+        Intent intent = new Intent(this, GoalsListActivity.class);
+        startActivity(intent);
+    }
+
 }

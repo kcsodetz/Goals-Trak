@@ -1,7 +1,9 @@
 package edu.sodetzpurdue.goals_trak;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,4 +24,10 @@ public class GoalsListActivity extends AppCompatActivity {
         );
         listView.setAdapter(arrayAdapter);
     }
+
+    public void changeView(View view){
+        Intent intent = new Intent(this, AddGoalActivity.class);
+        startActivity(intent);
+    }
+
 }

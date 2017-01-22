@@ -71,16 +71,6 @@
         android:layout_alignBottom="@+id/addToRunningButton"
         android:layout_toStartOf="@+id/addToRunningButton" />
 
-    <Button
-        android:text="Back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
-        android:id="@+id/backToList"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="changeView"/>
-
     <TextView
         android:text="TextView"
         android:layout_height="60dp"
@@ -110,4 +100,23 @@
         android:layout_below="@+id/addToRunningButton"
         android:layout_alignParentStart="true"
         android:layout_marginTop="14dp" />
+
+    <Button
+        android:text="Back"
+        android:layout_height="50dp"
+        android:id="@+id/backToList"
+        android:onClick="changeView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp" />
+
+    <Button
+        android:text="Delete"
+        android:id="@+id/deleteBtn"
+        android:layout_width="80dp"
+        android:background="#CC0000"
+        android:layout_alignBaseline="@+id/backToList"
+        android:layout_alignBottom="@+id/backToList"
+        android:layout_alignParentEnd="true"
+        android:layout_height="45dp" />
 </RelativeLayout>

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class DisplayGoalActivity extends AppCompatActivity {
     TextView runningTotalText, durationNumText, frequencyText, percentageText, congratsText;
-    Button addBtn, backBtn;
+    Button addBtn, backBtn, delBtn;
     EditText addEdit;
 
     Double addedNum;
@@ -37,8 +37,17 @@ public class DisplayGoalActivity extends AppCompatActivity {
         percentageText.setText(temp);
         congratsText = (TextView)findViewById(R.id.congratsText);
         addBtn = (Button)findViewById(R.id.addToRunningButton);
-
         backBtn = (Button)findViewById(R.id.backToList);
+        delBtn = (Button)findViewById(R.id.deleteBtn);
+        delBtn.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        ((GoalsTrak)getApplication()).removeObject(goalsmanager);
+                        changeView(v);
+                    }
+                }
+        );
         addBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -91,6 +100,8 @@ public class DisplayGoalActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 
 }
