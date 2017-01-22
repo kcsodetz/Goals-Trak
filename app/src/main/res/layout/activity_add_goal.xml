@@ -30,25 +30,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:layout_marginTop="30dp"
-        android:id="@+id/numEdit"
-        android:hint="Number"
-        android:layout_below="@+id/enterGoal"
-        android:layout_alignStart="@+id/enterGoal" />
-
-    <Spinner
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:id="@+id/spinner"
-        android:dropDownWidth="match_parent"
-        android:layout_alignTop="@+id/numEdit"
-        android:layout_alignEnd="@+id/enterGoal" />
-
     <TextView
         android:text="Duration/Amount - Ex: 1 Hour, 100 Dollars"
         android:layout_width="wrap_content"
@@ -57,5 +38,51 @@
         android:id="@+id/durationText"
         android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:layout_marginTop="32dp"
+        android:id="@+id/numEdit"
+        android:hint="Number"
+        android:layout_below="@+id/enterGoal"
+        android:layout_alignStart="@+id/durationText" />
+
+    <Spinner
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:id="@+id/spinner"
+        android:dropDownWidth="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_alignTop="@+id/numEdit"
+        android:layout_toEndOf="@+id/numEdit" />
+
+    <CheckBox
+        android:text="Send Notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notificationsCheckbox"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"/>
+
+    <Spinner
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:id="@+id/timeSpinner"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/notificationsCheckbox"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Select Time"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/selectTimeButton"
+        android:layout_alignTop="@+id/timeSpinner"
+        android:layout_toEndOf="@+id/doneButton" />
 
 </RelativeLayout>

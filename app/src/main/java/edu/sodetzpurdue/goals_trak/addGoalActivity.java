@@ -2,11 +2,16 @@ package edu.sodetzpurdue.goals_trak;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 
-public class AddGoalActivity extends AppCompatActivity {
-
+public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
+    Button timeButton;
+    CheckBox checkBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,5 +20,21 @@ public class AddGoalActivity extends AppCompatActivity {
         String[] dropdownList = {"Hours", "Days", "Weeks", "Months", "Dollars", "Repititions", "Other"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dropdownList);
         dropdown.setAdapter(adapter);
+        timeButton = (Button)findViewById(R.id.selectTimeButton);
+        timeButton.setEnabled(false);
+        checkBox = (CheckBox) findViewById(R.id.notificationsCheckbox);
+        checkBox.setOnClickListener(this);
+    }
+
+
+    //@Override
+    public void onClick(View v) {
+        CheckBox t = (CheckBox) v;
+        if (t.isChecked()){
+            timeButton.setEnabled(true);
+        }
+        else {
+            timeButton.setEnabled(false);
+        }
     }
 }
