@@ -1,5 +1,7 @@
 package edu.sodetzpurdue.goals_trak;
 
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +10,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
     Button timeButton;
     CheckBox checkBox;
     Spinner dropdown, notificationsDrop;
+    static final int DIALOGE_ID = 0;
+    int hour_x;
+    int minute_x;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +36,37 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         notificationsDrop.setEnabled(false);
         checkBox = (CheckBox) findViewById(R.id.notificationsCheckbox);
         checkBox.setOnClickListener(this);
+        showTime();
     }
 
+    public void showTime(){
+        timeButton.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        showDialog(DIALOGE_ID);
+                    }
+                }
+        );
+    }
 
+    @Override
+    protected Dialog onCreateDialog(int id){
+        if (id == DIALOGE_ID){
+            return new TimePickerDialog(AddGoalActivity.this, kTimePickerListener, hour_x, minute_x, false);
+        }
+        return null;
+
+    }
+
+    protected TimePickerDialog.OnTimeSetListener kTimePickerListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            hour_x = hourOfDay;
+            minute = minute_x;
+
+        }
+    };
     //@Override
     public void onClick(View v) {
         CheckBox t = (CheckBox) v;
