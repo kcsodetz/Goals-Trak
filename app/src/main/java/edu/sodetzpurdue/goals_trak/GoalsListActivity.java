@@ -39,6 +39,11 @@ public class GoalsListActivity extends AppCompatActivity {
         startActivityForResult(intent, 12345);
     }
 
+    public void pressedFAB(View view){
+        Intent intent = new Intent(this, AddGoalActivity.class);
+        startActivity(intent);
+    }
+
     /*public View getViewByPosition(int pos, ListView listView) {
         final int firstListItemPosition = listView.getFirstVisiblePosition();
         final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
