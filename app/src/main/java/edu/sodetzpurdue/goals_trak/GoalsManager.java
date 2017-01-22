@@ -28,6 +28,32 @@ public class GoalsManager implements Parcelable{
 
     //public GoalsManager(){}
 
+    public String getGoal(){
+        return goal;
+    }
+    public String getQualifier(){
+        return qualifier;
+    }
+    public String getFrequency(){
+        return frequency;
+    }
+    public String getAmpm(){
+        return ampm;
+    }
+    public int getDurationNum(){
+        return durationNum;
+    }
+    public int getHour(){
+        return hour;
+    }
+    public int getMin(){
+        return min;
+    }
+    public double getPercentage(){
+        return percentage;
+    }
+
+
     private boolean sendNotifications(){
         if (hour == -1 || min == -1)
             return false;

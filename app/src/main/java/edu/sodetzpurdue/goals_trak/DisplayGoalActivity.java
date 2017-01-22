@@ -12,7 +12,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_goal);
         //// TODO: 1/22/2017 finish methods
         Intent intent = getIntent();
-        GoalsManager goalsmanager = (GoalsManager) intent.getParcelableExtra("Passer");
+        GoalsManager goalsmanager = intent.getParcelableExtra("Passer");
 
     }
 
