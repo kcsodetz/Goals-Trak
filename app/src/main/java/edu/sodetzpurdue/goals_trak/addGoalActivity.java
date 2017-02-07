@@ -7,6 +7,8 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -75,7 +77,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                             emptyEditTextToast(3);
                         }
                         if(!checkBox.isChecked() && (hour_x != -1 || minute_x != -1))
-                            timeButton.setText("SELECT TIME");
+                            timeButton.setText(R.string.setTime);
                         try {
                             amount = Integer.parseInt(temp);
                         } catch (Exception e){
@@ -95,6 +97,21 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         );
 
         showTime();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home_action:
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+            default:
+                return true;
+        }
     }
 
     public void createGoalsManagerObject(){
@@ -200,4 +217,9 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
             notificationsDrop.setEnabled(false);
         }
     }
+
+    /*public void changeView(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }*/
 }
