@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
     //variable declarations
+
+    int hour_x = -1;
+    int minute_x = -1;
     Button timeButton, doneBtn;
     CheckBox checkBox;
     Spinner dropdown, notificationsDrop;
@@ -31,9 +34,6 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     String dayWeekMonthSpinner = "DEFAULT";
     String ampm = "DEFAULT";
     public static final int DIALOG_ID = 0;
-    int hour_x = -1;
-    int minute_x = -1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

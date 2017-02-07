@@ -22,15 +22,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="Done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/doneButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        />
-
     <TextView
         android:text="Duration/Amount - Ex: 1 Hour, 100 Dollars"
         android:layout_width="wrap_content"
@@ -67,14 +58,6 @@
         android:layout_below="@+id/notificationsCheckbox"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:text="Select Time"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/selectTimeButton"
-        android:layout_alignTop="@+id/timeSpinner"
-        android:layout_toEndOf="@+id/doneButton" />
-
     <TextView
         android:text="AT"
         android:layout_width="wrap_content"
@@ -95,5 +78,21 @@
         android:layout_marginTop="37dp"
         android:layout_below="@+id/enterGoalTextEdit"
         android:layout_alignStart="@+id/durationText" />
+
+    <Button
+        android:text="Done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doneButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Select Time"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/selectTimeButton"
+        android:layout_alignTop="@+id/timeSpinner"
+        android:layout_toEndOf="@+id/doneButton" />
 
 </RelativeLayout>
