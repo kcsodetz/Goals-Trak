@@ -205,7 +205,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
             timeButton.setText(timeString);
         }
     };
-    //@Override
+    @Override
     public void onClick(View v) {
         CheckBox t = (CheckBox) v;
         if (t.isChecked()){
@@ -218,8 +218,4 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    /*public void changeView(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }*/
 }

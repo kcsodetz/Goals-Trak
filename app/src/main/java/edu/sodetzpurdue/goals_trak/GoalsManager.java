@@ -1,8 +1,5 @@
 package edu.sodetzpurdue.goals_trak;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 /**
