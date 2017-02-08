@@ -3,7 +3,7 @@
     xmlns:compat="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/home_action"
-       android:title="home_action"
+       android:title="@string/home_action"
         android:icon="@mipmap/ic_home_white_24dp"
         compat:showAsAction="always"
         />
