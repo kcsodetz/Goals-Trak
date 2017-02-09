@@ -18,6 +18,8 @@ public class GoalsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ArrayList<GoalsManager> arrayList = ((GoalsTrak)getApplication()).getArrayList();
+        //Intent intent = getIntent();
+        //GoalsManager goalsManager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalsName"));
         setContentView(R.layout.activity_goals_list);
         setTitle("Goals in Progress");
         listView = (ListView)findViewById(R.id.listView);
@@ -35,12 +37,13 @@ public class GoalsListActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
     }
 
+    
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { //for the action button
         switch (item.getItemId()) {
             case R.id.home_action:
                 startActivity(new Intent(this, MainActivity.class));

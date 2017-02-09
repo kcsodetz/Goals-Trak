@@ -1,5 +1,6 @@
 package edu.sodetzpurdue.goals_trak;
 
+import android.app.Application;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -89,8 +90,8 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         System.out.println(dayWeekMonthSpinner);
                         if (!goalName.equals("") && !temp.equals("")){
                             //// TODO: 1/21/2017 implement appropriate methods
-                            createGoalsManagerObject();
-                            changeActivity(v);
+                            GoalsManager goalsManager = createGoalsManagerObject();
+                            changeActivity(v, goalsManager.getGoal());
                         }
                     }
                 }
@@ -114,9 +115,11 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void createGoalsManagerObject(){
-        Intent intent = new Intent(this, DisplayGoalActivity.class);
-        GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+    public GoalsManager createGoalsManagerObject(){
+        //Intent intent = new Intent(this, DisplayGoalActivity.class);
+        GoalsManager goalsManager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+        ((GoalsTrak)getApplication()).addObject(goalsManager);
+        return goalsManager;
         //intent.putExtra("goalsmanager", goalsmanager);
     }
 
@@ -131,11 +134,14 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, "You did not enter a time for notifications", Toast.LENGTH_SHORT).show();
     }
 
-    public void changeActivity(View view){
+    public void changeActivity(View view, String goalName){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
-        GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
-        intent.putExtra("key", goalsmanager);
-        startActivityForResult(intent, 12345);
+        //GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
+        //intent.putExtra("key", goalsmanager);
+        //startActivityForResult(intent, 12345);
+        intent.putExtra("goalName", goalName);
+        startActivity(intent);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){

@@ -10,6 +10,21 @@ import java.util.HashMap;
  */
 
 public class GoalsTrak extends Application{
+
+    private HashMap<String, GoalsManager> goalsMap = new HashMap<>();
+
+    public void addObj(GoalsManager goalsManager){
+        goalsMap.put(goalsManager.getGoal(), goalsManager);
+    }
+
+    public void remObj(GoalsManager goalsManager){
+        goalsMap.remove(goalsManager.getGoal());
+    }
+
+    public GoalsManager getGoalsManager(String goalName){
+        return goalsMap.get(goalName);
+    }
+
     private ArrayList<GoalsManager> arrayList = new ArrayList<>();
 
     public ArrayList<GoalsManager> getArrayList(){

@@ -23,7 +23,9 @@ public class DisplayGoalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_goal);
         //needs methods below
         Bundle bundle = getIntent().getExtras();
-        final GoalsManager goalsmanager = (GoalsManager) bundle.getSerializable("key");
+        //final GoalsManager goalsmanager = (GoalsManager) bundle.getSerializable("key");
+        Intent intent = getIntent();
+        final GoalsManager goalsmanager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalsName"));
         setTitle(goalsmanager.getGoal());
         goalsmanager.calculatePercentages(0);
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
@@ -45,7 +47,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        ((GoalsTrak)getApplication()).removeObject(goalsmanager);
+                        ((GoalsTrak)getApplication()).remObj(goalsmanager);
                         changeView(v);
                     }
                 }
@@ -66,7 +68,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
                             System.out.println("ERROR");
                         }
                         updateScreenNumbers(goalsmanager, goalsmanager.checkIfComplete());
-                        ((GoalsTrak)getApplication()).addObject(goalsmanager);
+                        //((GoalsTrak)getApplication()).addObject(goalsmanager);
                     }
                 }
         );
@@ -111,8 +113,8 @@ public class DisplayGoalActivity extends AppCompatActivity {
         temp = Double.toString(goalsmanager.getPercentage());
         percentageText.setText(temp);
         if (isComplete) {
-            percentageText.setText("100");
-            congratsText.setText("Congratulations!!! You have completed your goal!");
+            percentageText.setText(R.string.one_hundred);
+            congratsText.setText(R.string.congrats_msg);
             addEdit.setHint(" ");
             addBtn.setEnabled(false);
             addEdit.setEnabled(false);

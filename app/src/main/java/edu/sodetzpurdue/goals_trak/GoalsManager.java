@@ -10,13 +10,13 @@ public class GoalsManager implements Serializable{
 
     public static final long serialVersionUID = 1L;
 
-    private String goal, qualifier, frequency, ampm;
+    private String goalName, qualifier, frequency, ampm;
     private int durationNum, hour, min;
     private double percentage, runningTotal;
     private boolean isComplete;
 
-    public GoalsManager(String goal, int durationNum, String qualifier, String frequency, int hour, int min, String ampm){
-        this.goal = goal;
+    public GoalsManager(String goalName, int durationNum, String qualifier, String frequency, int hour, int min, String ampm){
+        this.goalName = goalName;
         this.durationNum = durationNum;
         this.qualifier = qualifier;
         this.frequency = frequency;
@@ -30,7 +30,7 @@ public class GoalsManager implements Serializable{
     //public GoalsManager(){}
 
     public String getGoal(){
-        return goal;
+        return goalName;
     }
     public String getQualifier(){
         return qualifier;
