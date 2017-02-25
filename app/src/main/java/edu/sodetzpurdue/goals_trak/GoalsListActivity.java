@@ -1,6 +1,8 @@
 package edu.sodetzpurdue.goals_trak;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,29 +12,33 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.sql.SQLOutput;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.security.AccessController.getContext;
+
 public class GoalsListActivity extends AppCompatActivity {
     ListView listView;
+    //String filename = "HashMap";
     ArrayList<String> arrayList;
+    HashMap<String, GoalsManager> map;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        HashMap<String, GoalsManager> map = ((GoalsTrak)getApplication()).getHashMap();
+        ((GoalsTrak)getApplication()).readHashMap();
+        map = ((GoalsTrak)getApplication()).getHashMap();
         arrayList = buildList(map);
-        if (savedInstanceState != null) {
-            onRestoreInstanceState(savedInstanceState);
-            System.out.println("created");
-        }
         //Intent intent = getIntent();
         //GoalsManager goalsManager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalsName"));
         setContentView(R.layout.activity_goals_list);
         setTitle("Goals in Progress");
         listView = (ListView)findViewById(R.id.listView);
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
@@ -42,6 +48,7 @@ public class GoalsListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg){
                 //Intent intent = new Intent(this, DisplayGoalActivity.class);
+                ((GoalsTrak)getApplication()).saveHashMap(); //save state
                 String key = (String) adapter.getAdapter().getItem(position);
                 changeView(view, key);
             }
@@ -50,25 +57,57 @@ public class GoalsListActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putStringArrayList("arrayList", arrayList);
+    /*private void saveHashMap(){
+        System.out.println("Attempting to save");
+        try{
+            map = ((GoalsTrak)getApplication()).getHashMap();
+            File file = new File(getFilesDir(), filename);
+            if(file.exists()) {
+                file.delete();
+                System.out.println("Deleted");
+            }
+            file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(map);
+            oos.flush();
+            oos.close();
+            System.out.println("Saved");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        arrayList = savedInstanceState.getStringArrayList("arrayList");
+    private void readHashMap(){
+        System.out.println("Attempting to read");
+        File file = new File(getFilesDir(), filename);
+        try{
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            ((GoalsTrak)getApplication()).setHash((HashMap<String, GoalsManager>)ois.readObject());
+            ois.close();
+            System.out.println("Read");
+            buildList(((GoalsTrak)getApplication()).getHashMap());
+            System.out.println("Built");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    protected void onSaveInstanceState(Bundle savedInstanceState){
+        ((GoalsTrak)getApplication()).saveHashMap();
+        System.out.println("saved");
     }
 
-    public ArrayList buildList(HashMap<String, GoalsManager> map){
+    public ArrayList<String> buildList(HashMap<String, GoalsManager> map){ //placing the appropriate keys in the list view
         ArrayList<String> mapArrayList = new ArrayList<>();
         for (Map.Entry<String,GoalsManager> entry : map.entrySet()) {
             String key = entry.getKey();
             mapArrayList.add(key);
         }
-
         return mapArrayList;
     }
 
@@ -97,6 +136,7 @@ public class GoalsListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.home_action:
                 startActivity(new Intent(this, MainActivity.class));
+                ((GoalsTrak)getApplication()).saveHashMap(); //save state
                 return true;
             default:
                 return true;
@@ -106,11 +146,13 @@ public class GoalsListActivity extends AppCompatActivity {
     public void changeView(View view, String goalName){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
         intent.putExtra("goalName", goalName);
+        ((GoalsTrak)getApplication()).saveHashMap();
         startActivity(intent);
     }
 
     public void pressedFAB(View view){
         Intent intent = new Intent(this, AddGoalActivity.class);
+        ((GoalsTrak)getApplication()).saveHashMap();
         startActivity(intent);
     }
 

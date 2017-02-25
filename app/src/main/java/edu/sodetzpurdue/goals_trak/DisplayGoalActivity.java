@@ -13,18 +13,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 
 public class DisplayGoalActivity extends AppCompatActivity {
     TextView runningTotalText, durationNumText, frequencyText, percentageText, congratsText;
     Button addBtn, backBtn, delBtn;
     EditText addEdit;
     Double addedNum;
+    GoalsManager goalsmanager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //((GoalsTrak)getApplication()).readHashMap();
         setContentView(R.layout.activity_display_goal);
         Intent intent = getIntent();
-        final GoalsManager goalsmanager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalName"));
+        goalsmanager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalName"));
         System.out.println(intent.getExtras().getString("goalName"));
         setTitle(goalsmanager.getGoal());
         goalsmanager.calculatePercentages(0);
@@ -43,16 +47,17 @@ public class DisplayGoalActivity extends AppCompatActivity {
         addBtn = (Button)findViewById(R.id.addToRunningButton);
         backBtn = (Button)findViewById(R.id.backToList);
         delBtn = (Button)findViewById(R.id.deleteBtn);
-        delBtn.setOnClickListener(
+        delBtn.setOnClickListener( // handles delete button
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
                         ((GoalsTrak)getApplication()).remObj(goalsmanager);
+                        ((GoalsTrak)getApplication()).saveHashMap(); //save state
                         changeView(v);
                     }
                 }
         );
-        addBtn.setOnClickListener(
+        addBtn.setOnClickListener( //handles add button
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -83,6 +88,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.home_action:
                 startActivity(new Intent(this, MainActivity.class));
+                ((GoalsTrak)getApplication()).saveHashMap();
                 return true;
             default:
                 return true;
@@ -92,6 +98,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
     public void changeView(View view){
         Intent intent = new Intent(this, GoalsListActivity.class);
         //((GoalsTrak)getApplication()).addObject(goalsManager);
+        ((GoalsTrak)getApplication()).saveHashMap(); //save state
         startActivity(intent);
     }
 
@@ -118,11 +125,6 @@ public class DisplayGoalActivity extends AppCompatActivity {
             addEdit.setHint(" ");
             addBtn.setEnabled(false);
             addEdit.setEnabled(false);
-
         }
     }
-
-
-
-
 }

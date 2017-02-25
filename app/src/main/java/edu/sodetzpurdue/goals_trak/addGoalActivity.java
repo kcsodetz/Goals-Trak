@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
     //variable declarations
 
@@ -124,8 +126,6 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         return goalsManager;
         //intent.putExtra("goalsmanager", goalsmanager);
     }
-
-
 
     public void emptyEditTextToast(int num){
         if (num == 1)

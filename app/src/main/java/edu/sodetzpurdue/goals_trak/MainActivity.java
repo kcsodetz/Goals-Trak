@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,5 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GoalsListActivity.class);
         startActivity(intent);
     }
+
+
 
 }
