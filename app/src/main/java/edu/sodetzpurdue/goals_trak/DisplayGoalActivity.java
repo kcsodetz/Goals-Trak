@@ -27,8 +27,8 @@ public class DisplayGoalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final GoalsManager goalsmanager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalName"));
         System.out.println(intent.getExtras().getString("goalName"));
-        //setTitle(goalsmanager.getGoal());
-        setTitle("Temp");
+        setTitle(goalsmanager.getGoal());
+        //setTitle("Temp");
         goalsmanager.calculatePercentages(0);
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
         durationNumText = (TextView)findViewById(R.id.durationNumText);

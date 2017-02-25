@@ -11,34 +11,66 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GoalsListActivity extends AppCompatActivity {
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //ArrayList<GoalsManager> arrayList = ((GoalsTrak)getApplication()).getArrayList();
+        HashMap<String, GoalsManager> map = ((GoalsTrak)getApplication()).getHashMap();
+        ArrayList<String> arrayList = buildList(map);
         //Intent intent = getIntent();
         //GoalsManager goalsManager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalsName"));
         setContentView(R.layout.activity_goals_list);
         setTitle("Goals in Progress");
         listView = (ListView)findViewById(R.id.listView);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_list_item_1, arrayList);
+        listView.setAdapter(arrayAdapter);
+
+        //populateList(map);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg){
                 //Intent intent = new Intent(this, DisplayGoalActivity.class);
-                GoalsManager goalsmanager = (GoalsManager) adapter.getAdapter().getItem(position);
-                changeView(view, goalsmanager);
+                String key = (String) adapter.getAdapter().getItem(position);
+                changeView(view, key);
             }
         });
-        /*ArrayAdapter<GoalsManager> arrayAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, arrayList
-        );
-        listView.setAdapter(arrayAdapter);*/
+
+
     }
 
+    public ArrayList buildList(HashMap<String, GoalsManager> map){
+        ArrayList<String> mapArrayList = new ArrayList<>();
+        for (Map.Entry<String,GoalsManager> entry : map.entrySet()) {
+            String key = entry.getKey();
+            mapArrayList.add(key);
+        }
+
+        return mapArrayList;
+    }
+
+
+    /*public void populateList(HashMap<String, GoalsManager> map){
+        DataAdapter adapter = new DataAdapter(map);
+
+        System.out.println(map.isEmpty());
+        System.out.println(map.size());
+        System.out.println(map.containsKey("hi"));
+        for (Map.Entry<String,GoalsManager> entry : map.entrySet()) {
+            String key = entry.getKey();
+            //String value = entry.getValue();
+            // do stuff
+            System.out.println(key);
+        }
+        listView.setAdapter(adapter);
+    }*/
     
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu){ //Create the action button
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
@@ -53,10 +85,10 @@ public class GoalsListActivity extends AppCompatActivity {
         }
     }
 
-    public void changeView(View view, GoalsManager goalsManager){
+    public void changeView(View view, String goalName){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
-        intent.putExtra("key", goalsManager);
-        startActivityForResult(intent, 12345);
+        intent.putExtra("goalName", goalName);
+        startActivity(intent);
     }
 
     public void pressedFAB(View view){
@@ -64,7 +96,7 @@ public class GoalsListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*public View getViewByPosition(int pos, ListView listView) {
+    public View getViewByPosition(int pos, ListView listView) {
         final int firstListItemPosition = listView.getFirstVisiblePosition();
         final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
@@ -74,7 +106,7 @@ public class GoalsListActivity extends AppCompatActivity {
             final int childIndex = pos - firstListItemPosition;
             return listView.getChildAt(childIndex);
         }
-    }*/
+    }
 
    /*public void changeActivity(View view, ){
         Intent intent = new Intent(this, DisplayGoalActivity.class);

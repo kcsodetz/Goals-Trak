@@ -4,6 +4,7 @@ import android.app.Application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ken Sodetz on 1/22/2017.
@@ -12,6 +13,10 @@ import java.util.HashMap;
 public class GoalsTrak extends Application{
 
     private HashMap<String, GoalsManager> goalsMap = new HashMap<>();
+
+    public HashMap<String, GoalsManager> getHashMap(){
+        return goalsMap;
+    }
 
     public void addObj(GoalsManager goalsManager){
         goalsMap.put(goalsManager.getGoal(), goalsManager);
