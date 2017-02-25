@@ -25,21 +25,21 @@ public class GoalsTrak extends Application{
         return goalsMap.get(goalName);
     }
 
-    private ArrayList<GoalsManager> arrayList = new ArrayList<>();
+    //private ArrayList<GoalsManager> arrayList = new ArrayList<>();
 
-    public ArrayList<GoalsManager> getArrayList(){
+    /*public ArrayList<GoalsManager> getArrayList(){
         return arrayList;
-    }
+    }*/
 
-    public void addObject(GoalsManager goalsManager){
+    /*public void addObject(GoalsManager goalsManager){
         arrayList.add(goalsManager);
-    }
+    }*/
 
-    public void removeObject(GoalsManager goalsManager){
+    /*public void removeObject(GoalsManager goalsManager){
         arrayList.remove(goalsManager);
-    }
+    }*/
 
-    public void printList(){
+    /*public void printList(){
         System.out.println(arrayList);
-    }
+    }*/
 }

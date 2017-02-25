@@ -17,7 +17,7 @@ public class GoalsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<GoalsManager> arrayList = ((GoalsTrak)getApplication()).getArrayList();
+        //ArrayList<GoalsManager> arrayList = ((GoalsTrak)getApplication()).getArrayList();
         //Intent intent = getIntent();
         //GoalsManager goalsManager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalsName"));
         setContentView(R.layout.activity_goals_list);
@@ -31,10 +31,10 @@ public class GoalsListActivity extends AppCompatActivity {
                 changeView(view, goalsmanager);
             }
         });
-        ArrayAdapter<GoalsManager> arrayAdapter = new ArrayAdapter<>(
+        /*ArrayAdapter<GoalsManager> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_1, arrayList
         );
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(arrayAdapter);*/
     }
 
     

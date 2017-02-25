@@ -91,7 +91,9 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         if (!goalName.equals("") && !temp.equals("")){
                             //// TODO: 1/21/2017 implement appropriate methods
                             GoalsManager goalsManager = createGoalsManagerObject();
+                            System.out.println(goalsManager.getGoal());
                             changeActivity(v, goalsManager.getGoal());
+
                         }
                     }
                 }
@@ -118,7 +120,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     public GoalsManager createGoalsManagerObject(){
         //Intent intent = new Intent(this, DisplayGoalActivity.class);
         GoalsManager goalsManager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
-        ((GoalsTrak)getApplication()).addObject(goalsManager);
+        ((GoalsTrak)getApplication()).addObj(goalsManager);
         return goalsManager;
         //intent.putExtra("goalsmanager", goalsmanager);
     }
@@ -144,14 +146,14 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+    /*protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
         if (requestCode == 12345){
             if (resultCode == RESULT_OK){
                 GoalsManager goalsManager = (GoalsManager)intent.getSerializableExtra("key");
             }
         }
-    }
+    }*/
 
 
     /*public void onDonePress(View view){
