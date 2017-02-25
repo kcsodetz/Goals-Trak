@@ -10,17 +10,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GoalsListActivity extends AppCompatActivity {
     ListView listView;
+    ArrayList<String> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         HashMap<String, GoalsManager> map = ((GoalsTrak)getApplication()).getHashMap();
-        ArrayList<String> arrayList = buildList(map);
+        arrayList = buildList(map);
+        if (savedInstanceState != null) {
+            onRestoreInstanceState(savedInstanceState);
+            System.out.println("created");
+        }
         //Intent intent = getIntent();
         //GoalsManager goalsManager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalsName"));
         setContentView(R.layout.activity_goals_list);
@@ -42,6 +48,18 @@ public class GoalsListActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putStringArrayList("arrayList", arrayList);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        arrayList = savedInstanceState.getStringArrayList("arrayList");
     }
 
     public ArrayList buildList(HashMap<String, GoalsManager> map){

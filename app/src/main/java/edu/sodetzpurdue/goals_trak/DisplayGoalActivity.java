@@ -1,6 +1,7 @@
 package edu.sodetzpurdue.goals_trak;
 
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,29 +13,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class DisplayGoalActivity extends AppCompatActivity {
     TextView runningTotalText, durationNumText, frequencyText, percentageText, congratsText;
     Button addBtn, backBtn, delBtn;
     EditText addEdit;
-
     Double addedNum;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_goal);
-        //needs methods below
-        Bundle bundle = getIntent().getExtras();
-        //final GoalsManager goalsmanager = (GoalsManager) bundle.getSerializable("key");
         Intent intent = getIntent();
         final GoalsManager goalsmanager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalName"));
         System.out.println(intent.getExtras().getString("goalName"));
         setTitle(goalsmanager.getGoal());
-        //setTitle("Temp");
         goalsmanager.calculatePercentages(0);
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
         durationNumText = (TextView)findViewById(R.id.durationNumText);
         frequencyText = (TextView)findViewById(R.id.frequencyText);
         percentageText = (TextView)findViewById(R.id.percentageText);
-        String temp = Double.toString(goalsmanager.getRunningTotal());
+        String temp = Integer.toString((int)goalsmanager.getRunningTotal());
         runningTotalText.setText(temp);
         temp = Integer.toString(goalsmanager.getDurationNum());
         durationNumText.setText(temp);
@@ -107,7 +105,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
         durationNumText = (TextView)findViewById(R.id.durationNumText);
         frequencyText = (TextView)findViewById(R.id.frequencyText);
         percentageText = (TextView)findViewById(R.id.percentageText);
-        String temp = Double.toString(goalsmanager.getRunningTotal());
+        String temp = Integer.toString((int)goalsmanager.getRunningTotal());
         runningTotalText.setText(temp);
         temp = Integer.toString(goalsmanager.getDurationNum());
         durationNumText.setText(temp);

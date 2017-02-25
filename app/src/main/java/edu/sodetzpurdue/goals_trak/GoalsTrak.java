@@ -12,7 +12,12 @@ import java.util.Map;
 
 public class GoalsTrak extends Application{
 
+
     private HashMap<String, GoalsManager> goalsMap = new HashMap<>();
+
+    public void setHash(HashMap<String, GoalsManager> map){
+        this.goalsMap = map;
+    }
 
     public HashMap<String, GoalsManager> getHashMap(){
         return goalsMap;
