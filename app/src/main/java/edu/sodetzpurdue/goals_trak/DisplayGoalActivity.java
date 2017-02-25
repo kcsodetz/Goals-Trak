@@ -1,8 +1,6 @@
 package edu.sodetzpurdue.goals_trak;
 
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,29 +11,36 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
-
 public class DisplayGoalActivity extends AppCompatActivity {
+
+    //variable declarations
     TextView runningTotalText, durationNumText, frequencyText, percentageText, congratsText;
     Button addBtn, backBtn, delBtn;
     EditText addEdit;
     Double addedNum;
     GoalsManager goalsmanager;
 
+    //on Create Method
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        //((GoalsTrak)getApplication()).readHashMap();
         setContentView(R.layout.activity_display_goal);
         Intent intent = getIntent();
+
+        //create a local goalsmanager object in the scope of this activity
         goalsmanager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalName"));
-        System.out.println(intent.getExtras().getString("goalName"));
+
         setTitle(goalsmanager.getGoal());
         goalsmanager.calculatePercentages(0);
+
+        //Initialize TextViews
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
         durationNumText = (TextView)findViewById(R.id.durationNumText);
         frequencyText = (TextView)findViewById(R.id.frequencyText);
         percentageText = (TextView)findViewById(R.id.percentageText);
+
+        //Holder variable to set the text of the TextViews
         String temp = Integer.toString((int)goalsmanager.getRunningTotal());
         runningTotalText.setText(temp);
         temp = Integer.toString(goalsmanager.getDurationNum());
@@ -44,10 +49,14 @@ public class DisplayGoalActivity extends AppCompatActivity {
         temp = Double.toString(goalsmanager.getPercentage());
         percentageText.setText(temp);
         congratsText = (TextView)findViewById(R.id.congratsText);
+
+        //Initialize buttons
         addBtn = (Button)findViewById(R.id.addToRunningButton);
         backBtn = (Button)findViewById(R.id.backToList);
         delBtn = (Button)findViewById(R.id.deleteBtn);
-        delBtn.setOnClickListener( // handles delete button
+
+        //handles delete button
+        delBtn.setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
@@ -57,7 +66,9 @@ public class DisplayGoalActivity extends AppCompatActivity {
                     }
                 }
         );
-        addBtn.setOnClickListener( //handles add button
+
+        //handles add button
+        addBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -73,17 +84,18 @@ public class DisplayGoalActivity extends AppCompatActivity {
                             System.out.println("ERROR");
                         }
                         updateScreenNumbers(goalsmanager, goalsmanager.checkIfComplete());
-                        //((GoalsTrak)getApplication()).addObject(goalsmanager);
                     }
                 }
         );
     }
 
+    //create menu button
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
+    //handle menu button press
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home_action:
@@ -95,18 +107,21 @@ public class DisplayGoalActivity extends AppCompatActivity {
         }
     }
 
+    //change view method
     public void changeView(View view){
         Intent intent = new Intent(this, GoalsListActivity.class);
-        //((GoalsTrak)getApplication()).addObject(goalsManager);
         ((GoalsTrak)getApplication()).saveHashMap(); //save state
         startActivity(intent);
     }
 
+    //toasting invalid inputs
     public void toastInvalid(int code){
         if (code == 1)
             Toast.makeText(this, "Must enter a number", Toast.LENGTH_SHORT).show();
     }
 
+
+    //update values in the TextViews
     public void updateScreenNumbers(GoalsManager goalsmanager, Boolean isComplete){
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
         durationNumText = (TextView)findViewById(R.id.durationNumText);
@@ -119,6 +134,8 @@ public class DisplayGoalActivity extends AppCompatActivity {
         frequencyText.setText(goalsmanager.getQualifier());
         temp = Double.toString(goalsmanager.getPercentage());
         percentageText.setText(temp);
+
+        //check if complete
         if (isComplete) {
             percentageText.setText(R.string.one_hundred);
             congratsText.setText(R.string.congrats_msg);

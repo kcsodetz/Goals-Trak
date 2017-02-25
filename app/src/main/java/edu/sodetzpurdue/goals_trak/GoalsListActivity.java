@@ -24,26 +24,31 @@ import java.util.Map;
 import static java.security.AccessController.getContext;
 
 public class GoalsListActivity extends AppCompatActivity {
+
+    //Initialize variables
     ListView listView;
-    //String filename = "HashMap";
     ArrayList<String> arrayList;
     HashMap<String, GoalsManager> map;
+
+    //onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //read and update data from local storage
         ((GoalsTrak)getApplication()).readHashMap();
+
+        //Initialize a local instance of the Hashmap
         map = ((GoalsTrak)getApplication()).getHashMap();
         arrayList = buildList(map);
-        //Intent intent = getIntent();
-        //GoalsManager goalsManager = ((GoalsTrak)getApplication()).getGoalsManager(intent.getExtras().getString("goalsName"));
         setContentView(R.layout.activity_goals_list);
         setTitle("Goals in Progress");
         listView = (ListView)findViewById(R.id.listView);
+
+        //Initialze array list for the listView
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
-
-        //populateList(map);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg){

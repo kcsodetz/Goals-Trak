@@ -20,10 +20,6 @@ public class GoalsTrak extends Application{
     private String filename = "HashMap";
     private HashMap<String, GoalsManager> goalsMap = new HashMap<>();
 
-    public void setHash(HashMap<String, GoalsManager> map){
-        this.goalsMap = map;
-    }
-
     public HashMap<String, GoalsManager> getHashMap(){
         return goalsMap;
     }
@@ -76,22 +72,4 @@ public class GoalsTrak extends Application{
             e.printStackTrace();
         }
     }
-
-    //private ArrayList<GoalsManager> arrayList = new ArrayList<>();
-
-    /*public ArrayList<GoalsManager> getArrayList(){
-        return arrayList;
-    }*/
-
-    /*public void addObject(GoalsManager goalsManager){
-        arrayList.add(goalsManager);
-    }*/
-
-    /*public void removeObject(GoalsManager goalsManager){
-        arrayList.remove(goalsManager);
-    }*/
-
-    /*public void printList(){
-        System.out.println(arrayList);
-    }*/
 }
