@@ -6,15 +6,17 @@ import java.io.Serializable;
  * Created by Ken Sodetz on 1/21/2017.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class GoalsManager implements Serializable{
 
+    //initialized variables
     public static final long serialVersionUID = 1L;
-
     private String goalName, qualifier, frequency, ampm;
     private int durationNum, hour, min;
     private double percentage, runningTotal;
     private boolean isComplete;
 
+    //GoalsManager constructor
     public GoalsManager(String goalName, int durationNum, String qualifier, String frequency, int hour, int min, String ampm){
         this.goalName = goalName;
         this.durationNum = durationNum;
@@ -27,8 +29,7 @@ public class GoalsManager implements Serializable{
         isComplete = false;
     }
 
-    //public GoalsManager(){}
-
+    //getter methods for variables
     public String getGoal(){
         return goalName;
     }
@@ -57,14 +58,14 @@ public class GoalsManager implements Serializable{
         return runningTotal;
     }
 
-
+    //check if notifications were selected
     private boolean sendNotifications(){ // TODO: 1/22/2017 finish method
-        if (hour == -1 || min == -1)
-            return false;
-        return true;
+        if (!(hour == -1 || min == -1)) return true;
+        else return false;
     }
 
-    public void calculatePercentages(double add){
+    //calculate the percentage completed
+    void calculatePercentages(double add){
         runningTotal+=add;
         percentage = (runningTotal/durationNum)*100;
         if (percentage >= 100){
@@ -72,9 +73,8 @@ public class GoalsManager implements Serializable{
         }
     }
 
-    public boolean checkIfComplete(){
+    //check if goal is at 100%
+    boolean checkIfComplete(){
         return isComplete;
     }
-
-
 }

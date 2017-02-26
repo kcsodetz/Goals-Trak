@@ -1,28 +1,23 @@
 package edu.sodetzpurdue.goals_trak;
 
-import android.app.Application;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
+
     //variable declarations
 
     int hour_x = -1;
@@ -39,8 +34,10 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     String dayWeekMonthSpinner = "DEFAULT";
     String ampm = "DEFAULT";
     public static final int DIALOG_ID = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         // needs line below or else it throws a NPE
@@ -95,7 +92,6 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                             GoalsManager goalsManager = createGoalsManagerObject();
                             System.out.println(goalsManager.getGoal());
                             changeActivity(v, goalsManager.getGoal());
-
                         }
                     }
                 }
@@ -120,11 +116,9 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public GoalsManager createGoalsManagerObject(){
-        //Intent intent = new Intent(this, DisplayGoalActivity.class);
         GoalsManager goalsManager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
         ((GoalsTrak)getApplication()).addObj(goalsManager);
         return goalsManager;
-        //intent.putExtra("goalsmanager", goalsmanager);
     }
 
     public void emptyEditTextToast(int num){
@@ -138,42 +132,10 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
 
     public void changeActivity(View view, String goalName){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
-        //GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
-        //intent.putExtra("key", goalsmanager);
-        //startActivityForResult(intent, 12345);
         intent.putExtra("goalName", goalName);
         startActivity(intent);
 
     }
-
-    /*protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-        GoalsManager goalsmanager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
-        if (requestCode == 12345){
-            if (resultCode == RESULT_OK){
-                GoalsManager goalsManager = (GoalsManager)intent.getSerializableExtra("key");
-            }
-        }
-    }*/
-
-
-    /*public void onDonePress(View view){
-        goalName = name.getText().toString();
-        temp = userNumber.getText().toString();
-        if (goalName.equals("")){
-            Toast.makeText(this, "You did not enter a Goal", Toast.LENGTH_SHORT).show();
-        }
-        if (temp.equals("")){
-            Toast.makeText(this, "You did not enter a frequency/amount", Toast.LENGTH_SHORT).show();
-        }
-        try {
-            amount = Integer.parseInt(temp);
-        } catch (Exception e){
-            System.out.println("Empty");
-        }
-        System.out.println(goalName);
-    }
-    */
-
 
     public void showTime(){
         timeButton.setOnClickListener(
@@ -213,6 +175,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
             timeButton.setText(timeString);
         }
     };
+
     @Override
     public void onClick(View v) {
         CheckBox t = (CheckBox) v;
@@ -225,5 +188,4 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
             notificationsDrop.setEnabled(false);
         }
     }
-
 }
