@@ -120,7 +120,6 @@ public class DisplayGoalActivity extends AppCompatActivity {
             Toast.makeText(this, "Must enter a number", Toast.LENGTH_SHORT).show();
     }
 
-
     //update values in the TextViews
     public void updateScreenNumbers(GoalsManager goalsmanager, Boolean isComplete){
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
