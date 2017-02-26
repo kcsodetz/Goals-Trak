@@ -19,7 +19,6 @@ import android.widget.Toast;
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
 
     //variable declarations
-
     int hour_x = -1;
     int minute_x = -1;
     Button timeButton, doneBtn;

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 //outdated class, no longer in use
 public class CreateNewGoal extends AppCompatActivity {
     QuoteManager quoteManager = new QuoteManager();
