@@ -13,7 +13,9 @@ public class QuoteManager {
             "\"It always seems impossible until it's done.\" \n\t-Nelson Mandela",
             "\"It's not about where your starting point is, but your end goal and the journey that will get you there.\" \n\t-Unknown",
             "\"It's not who you think you are that holds you back it's who you think you're not.\"\n\t-Unknown",
-            "\"The first step to accepting yourself is to stop comparing yourself to others.\"\n\t-Joe Duncan"};
+            "\"The first step to accepting yourself is to stop comparing yourself to others.\"\n\t-Joe Duncan",
+            "\"Doubt kills more dreams than failure ever will.\"\n-Suzy Kassem",
+            "\"You don't have to see the whole staircase. Just take the first step.\"\n-Martin Luther King Jr."};
     public QuoteManager(){
 
     }
