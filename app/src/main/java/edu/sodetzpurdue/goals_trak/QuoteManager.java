@@ -17,7 +17,7 @@ public class QuoteManager {
             "\"Doubt kills more dreams than failure ever will.\"\n-Suzy Kassem",
             "\"You don't have to see the whole staircase. Just take the first step.\"\n-Martin Luther King Jr."};
     public QuoteManager(){
-
+	//add constructor method here
     }
 
     //TODO finish addQuote method
