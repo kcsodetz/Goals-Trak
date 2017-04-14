@@ -54,7 +54,6 @@ public class DisplayGoalActivity extends AppCompatActivity {
         addBtn = (Button)findViewById(R.id.addToRunningButton);
         backBtn = (Button)findViewById(R.id.backToList);
         delBtn = (Button)findViewById(R.id.deleteBtn);
-
         //handles delete button
         delBtn.setOnClickListener(
                 new View.OnClickListener(){
@@ -79,6 +78,9 @@ public class DisplayGoalActivity extends AppCompatActivity {
                             toastInvalid(1);
                         try {
                             addedNum = Double.parseDouble(temp);
+                            if (addedNum > goalsmanager.getDurationNum() || (addedNum + goalsmanager.getRunningTotal() > goalsmanager.getDurationNum())){
+                                addedNum = (double)goalsmanager.getDurationNum() - goalsmanager.getRunningTotal();
+                            }
                             goalsmanager.calculatePercentages(addedNum);
                         } catch (Exception e){
                             System.out.println("ERROR");
@@ -87,6 +89,8 @@ public class DisplayGoalActivity extends AppCompatActivity {
                     }
                 }
         );
+        if(goalsmanager.checkIfComplete())
+            checkCompletion(goalsmanager.checkIfComplete());
     }
 
     //create menu button
@@ -122,6 +126,7 @@ public class DisplayGoalActivity extends AppCompatActivity {
 
     //update values in the TextViews
     public void updateScreenNumbers(GoalsManager goalsmanager, Boolean isComplete){
+
         runningTotalText = (TextView)findViewById(R.id.runningTotalText);
         durationNumText = (TextView)findViewById(R.id.durationNumText);
         frequencyText = (TextView)findViewById(R.id.frequencyText);
@@ -135,12 +140,19 @@ public class DisplayGoalActivity extends AppCompatActivity {
         percentageText.setText(temp);
 
         //check if complete
+        checkCompletion(isComplete);
+    }
+    //method to disable add button and the text field to prevent adding numbers after the goal has been completed
+    private void checkCompletion(boolean isComplete){
         if (isComplete) {
             percentageText.setText(R.string.one_hundred);
             congratsText.setText(R.string.congrats_msg);
+            addEdit = (EditText)findViewById(R.id.addToRunningEdit);
             addEdit.setHint(" ");
             addBtn.setEnabled(false);
             addEdit.setEnabled(false);
+
         }
+
     }
 }

@@ -29,7 +29,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     Button timeButton, doneBtn;
     CheckBox checkBox;
     Spinner dropdown, notificationsDrop;
-    String timeString = "Select Time";
+    String timeString = "Set Time";
     String temp = DEFAULT;
     private EditText name, userNumber;
     String goalName = DEFAULT;
@@ -76,7 +76,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         else if (temp.equals("")){
                            emptyEditTextToast(NO_FREQUENCY);
                         }
-                        if(checkBox.isChecked() && (timeString.equals("Select Time"))){
+                        if(checkBox.isChecked() && (timeString.equals("Set Time"))){
                             emptyEditTextToast(NO_TIME);
                         }
                         if(!checkBox.isChecked() && (hour_x != -1 || minute_x != -1))
@@ -90,7 +90,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         System.out.println(amount);
                         System.out.println(frequencySpinner);
                         System.out.println(dayWeekMonthSpinner);
-                        if (!goalName.equals("") && !temp.equals("") && !timeString.equals("Select Time")){
+                        if (!goalName.equals("") && !temp.equals("") && (!timeString.equals("Set Time") || !checkBox.isChecked())){
                             //// TODO: 1/21/2017 implement appropriate methods
                             GoalsManager goalsManager = createGoalsManagerObject();
                             System.out.println(goalsManager.getGoal());
