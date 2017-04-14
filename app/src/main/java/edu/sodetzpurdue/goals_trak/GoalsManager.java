@@ -45,9 +45,7 @@ public class GoalsManager implements Serializable{
     public int getDurationNum(){
         return durationNum;
     }
-    public int getHour(){
-        return hour;
-    }
+    public int getHour(){return hour;}
     public int getMin(){
         return min;
     }

@@ -7,7 +7,8 @@ import java.util.Random;
  */
 
 public class QuoteManager {
-    public String[] quotes =
+
+    private String[] quotes =
             {"\"Fall down 7 times, stand up 8.\" \n\t-Japanese Proverb",
             "\"When you're going through hell, keep going.\" \n\t-Winston Churchill",
             "\"It always seems impossible until it's done.\" \n\t-Nelson Mandela",
@@ -17,7 +18,7 @@ public class QuoteManager {
             "\"Doubt kills more dreams than failure ever will.\"\n-Suzy Kassem",
             "\"You don't have to see the whole staircase. Just take the first step.\"\n-Martin Luther King Jr."};
     public QuoteManager(){
-
+	//add constructor method here
     }
 
     //TODO finish addQuote method
@@ -27,6 +28,7 @@ public class QuoteManager {
         quotes[numQuotes] = quote;
     }
 
+    //gets a random quote from the list
     public String getQuote(){
         Random rand = new Random();
         int num = rand.nextInt(quotes.length);

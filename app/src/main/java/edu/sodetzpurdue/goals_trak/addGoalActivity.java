@@ -19,20 +19,24 @@ import android.widget.Toast;
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
 
     //variable declarations
-    int hour_x = -1;
-    int minute_x = -1;
+    private final int NO_GOAL = 1;
+    private final int NO_FREQUENCY = 2;
+    private final int NO_TIME = 3;
+    public static final int DIALOG_ID = 0;
+    private final String DEFAULT = "DEFAULT";
+    int hour_x = 12;
+    int minute_x = 0;
     Button timeButton, doneBtn;
     CheckBox checkBox;
     Spinner dropdown, notificationsDrop;
-    String timeString = "Select Time";
-    String temp = "DEFAULT";
+    String timeString = "Set Time";
+    String temp = DEFAULT;
     private EditText name, userNumber;
-    String goalName = "DEFAULT";
+    String goalName = DEFAULT;
     int amount = -1;
-    String frequencySpinner = "DEFAULT";
-    String dayWeekMonthSpinner = "DEFAULT";
-    String ampm = "DEFAULT";
-    public static final int DIALOG_ID = 0;
+    String frequencySpinner = DEFAULT;
+    String dayWeekMonthSpinner = DEFAULT;
+    String ampm = DEFAULT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +71,13 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         frequencySpinner = dropdown.getSelectedItem().toString();
                         dayWeekMonthSpinner = notificationsDrop.getSelectedItem().toString();
                         if (goalName.equals("")){
-                            emptyEditTextToast(1);
+                            emptyEditTextToast(NO_GOAL);
                         }
-                        if (temp.equals("")){
-                           emptyEditTextToast(2);
+                        else if (temp.equals("")){
+                           emptyEditTextToast(NO_FREQUENCY);
                         }
-                        if(checkBox.isChecked() && (hour_x == -1 || minute_x == -1)){
-                            emptyEditTextToast(3);
+                        if(checkBox.isChecked() && (timeString.equals("Set Time"))){
+                            emptyEditTextToast(NO_TIME);
                         }
                         if(!checkBox.isChecked() && (hour_x != -1 || minute_x != -1))
                             timeButton.setText(R.string.setTime);
@@ -86,7 +90,7 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         System.out.println(amount);
                         System.out.println(frequencySpinner);
                         System.out.println(dayWeekMonthSpinner);
-                        if (!goalName.equals("") && !temp.equals("")){
+                        if (!goalName.equals("") && !temp.equals("") && (!timeString.equals("Set Time") || !checkBox.isChecked())){
                             //// TODO: 1/21/2017 implement appropriate methods
                             GoalsManager goalsManager = createGoalsManagerObject();
                             System.out.println(goalsManager.getGoal());
@@ -121,13 +125,22 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void emptyEditTextToast(int num){
-        if (num == 1)
-            Toast.makeText(this, "You did not enter a Goal", Toast.LENGTH_SHORT).show();
-        if (num == 2)
-            Toast.makeText(this, "You did not enter a frequency/amount", Toast.LENGTH_SHORT).show();
-        if (num == 3)
-            Toast.makeText(this, "You did not enter a time for notifications", Toast.LENGTH_SHORT).show();
+        switch (num){
+            case NO_GOAL:
+                Toast.makeText(this, "You did not enter a Goal", Toast.LENGTH_SHORT).show();
+                break;
+            case NO_FREQUENCY:
+                Toast.makeText(this, "You did not enter a frequency/amount", Toast.LENGTH_SHORT).show();
+                break;
+            case NO_TIME:
+                Toast.makeText(this, "You did not enter a time for notifications", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(this, "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
+
 
     public void changeActivity(View view, String goalName){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
@@ -153,7 +166,6 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
             return new TimePickerDialog(AddGoalActivity.this, kTimePickerListener, hour_x, minute_x, false);
         }
         return null;
-
     }
 
     protected TimePickerDialog.OnTimeSetListener kTimePickerListener = new TimePickerDialog.OnTimeSetListener() {
@@ -166,11 +178,15 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                 hour_x = hourOfDay - 12;
                 ampm = "PM";
             }
-            if (hourOfDay == 0)
-                hour_x = 12;
-            timeString = hour_x+":"+minute_x+ampm;
-            if(minute == 0)
-                timeString = hour_x+":00"+ampm;
+            if(hourOfDay == 12)
+                ampm = "PM";
+            if(hourOfDay == 0)
+                hour_x += 12;
+            if(minute < 10)
+                timeString = hour_x+":0"+minute_x+ampm;
+            else
+                timeString = hour_x+":"+minute_x+ampm;
+
             timeButton.setText(timeString);
         }
     };
