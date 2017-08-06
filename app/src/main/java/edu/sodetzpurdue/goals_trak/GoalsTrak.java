@@ -13,24 +13,38 @@ import java.util.Map;
 
 /**
  * Created by Ken Sodetz on 1/22/2017.
+ * @author Ken Sodetz
+ * @since 1/22/2017
  */
 
 public class GoalsTrak extends Application{
 
+    //Name of file to save the  goalsMap hash map
     private String filename = "HashMap";
+    //creates hash map for storing goalsManager objects
     private HashMap<String, GoalsManager> goalsMap = new HashMap<>();
-
+    //get the hash map
     public HashMap<String, GoalsManager> getHashMap(){
         return goalsMap;
     }
 
+
+
+    /**
+     *
+     * @param goalsManager
+     */
     public void addObj(GoalsManager goalsManager){
         goalsMap.put(goalsManager.getGoal(), goalsManager);
     }
 
+    //removes a goalsManager object from the hash mao
     public void remObj(GoalsManager goalsManager){
         goalsMap.remove(goalsManager.getGoal());
     }
+
+    //returns the specific goalsManager object by name
+
 
     public GoalsManager getGoalsManager(String goalName){
         return goalsMap.get(goalName);

@@ -3,7 +3,11 @@ package edu.sodetzpurdue.goals_trak;
 import java.util.Random;
 
 /**
- * Created by Ken Sodetz on 1/21/2017.
+ * The QuoteManager class allows the application to draw random quotes that are
+ * pre loaded, as well as add their own quotes.
+ *
+ * @author Ken Sodetz
+ * @since 1/21/2017
  */
 
 public class QuoteManager {

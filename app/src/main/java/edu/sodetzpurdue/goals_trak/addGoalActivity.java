@@ -16,9 +16,17 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+/**
+ * The AddGoalActivity class manages the user input for the goal being created
+ * @author Ken Sodetz
+ * @since 1/21/2017
+ */
+
 public class AddGoalActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //variable declarations
+    /**
+     * Initialized local variables
+     */
     private final int NO_GOAL = 1;
     private final int NO_FREQUENCY = 2;
     private final int NO_TIME = 3;
@@ -39,6 +47,10 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     String ampm = DEFAULT;
 
     @Override
+    /**
+     * The onCreate method
+     * @param savedInstanceState is the saved instance of type bundle
+     */
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -91,10 +103,10 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
                         System.out.println(frequencySpinner);
                         System.out.println(dayWeekMonthSpinner);
                         if (!goalName.equals("") && !temp.equals("") && (!timeString.equals("Set Time") || !checkBox.isChecked())){
-                            //// TODO: 1/21/2017 implement appropriate methods
+                            // TODO: 1/21/2017 implement appropriate methods
                             GoalsManager goalsManager = createGoalsManagerObject();
                             System.out.println(goalsManager.getGoal());
-                            changeActivity(v, goalsManager.getGoal());
+                            changeActivity(goalsManager.getGoal());
                         }
                     }
                 }
@@ -103,11 +115,21 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         showTime();
     }
 
+    /**
+     * The onCreateOptionsMenu creates the menu
+     * @param menu is the menu created, of type Menu
+     * @return true
+     */
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
+    /**
+     * The onOptionsItemSelected method gets the selected item from the spinner
+     * @param item if the menu item selected, of type MenuItem
+     * @return true
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home_action:
@@ -118,12 +140,20 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * The createGoalsManagerObject method creates a local instance of a GoalsManager object
+     * @return goalsManager
+     */
     public GoalsManager createGoalsManagerObject(){
         GoalsManager goalsManager = new GoalsManager(goalName, amount, frequencySpinner, dayWeekMonthSpinner, hour_x, minute_x, ampm);
         ((GoalsTrak)getApplication()).addObj(goalsManager);
         return goalsManager;
     }
 
+    /**
+     * The emptyEditTextToast method handles all calls to toast an empty edit text
+     * @param num is the numeric code to send a particular toast, of type final int
+     */
     public void emptyEditTextToast(int num){
         switch (num){
             case NO_GOAL:
@@ -141,14 +171,20 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
-    public void changeActivity(View view, String goalName){
+    /**
+     *
+     * @param goalName is the name of the current goal, of type string
+     */
+    public void changeActivity(String goalName){
         Intent intent = new Intent(this, DisplayGoalActivity.class);
         intent.putExtra("goalName", goalName);
         startActivity(intent);
 
     }
 
+    /**
+     * The showTime method sets the shows the current default time for the time picker
+     */
     public void showTime(){
         timeButton.setOnClickListener(
                 new View.OnClickListener(){
@@ -161,6 +197,11 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    /**
+     * The onCreateDialog helps create a time picker for the AddGoalActivity
+     * @param id is the id number of the time, of type int
+     * @return TimePickerDialog
+     */
     protected Dialog onCreateDialog(int id){
         if (id == DIALOG_ID){
             return new TimePickerDialog(AddGoalActivity.this, kTimePickerListener, hour_x, minute_x, false);
@@ -192,6 +233,10 @@ public class AddGoalActivity extends AppCompatActivity implements View.OnClickLi
     };
 
     @Override
+    /**
+     * The onClick method handles the event of a click in the activity
+     * @param v is the current view
+     */
     public void onClick(View v) {
         CheckBox t = (CheckBox) v;
         if (t.isChecked()){

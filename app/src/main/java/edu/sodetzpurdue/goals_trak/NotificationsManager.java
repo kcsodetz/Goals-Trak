@@ -10,13 +10,27 @@ import android.support.v4.app.NotificationCompat;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
- * Created by Ken Sodetz on 4/14/2017.
+ * Manages notifications for tbe application
+ * @author Ken Sodetz
+ * @since 4/14/2017
  */
 
 public class NotificationsManager {
 
+    /**
+     * Initialized local variables
+     */
+    private Context context;
     private int hour, minute;
     private String ampm, frequency;
+
+    /**
+     * Constructor for Notifications Manager
+     * @param hour is the hour to send the notification, of type int
+     * @param minute is the minute to send the notification, of type int
+     * @param ampm is the half of the day to send the notification, of type string
+     * @param frequency the the frequency to send the notification, of type string
+     */
     public NotificationsManager(int hour, int minute, String ampm, String frequency){
         this.hour = hour;
         this.minute = minute;
@@ -24,7 +38,9 @@ public class NotificationsManager {
         this.frequency = frequency;
     }
 
-    private Context context;
+    /**
+     * Builder fot the notifications manager
+     */
     private NotificationCompat.Builder builder =
             new NotificationCompat.Builder(context).setSmallIcon(R.drawable.ic_add_black_24dp).setContentTitle("Test Notification").setContentText("This is a comprehensive test");
 
