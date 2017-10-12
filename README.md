@@ -1,2 +1,2 @@
 # Goals-Trak
-A better way to keep track of your progression of your longterm and short term goals
+An Android App that creates a better way to keep track of progress on your long term and short term goals.
